@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Algorithm_Project
 {
-    public class Node
+    public class QueriesActors
     {
-        public string movie;
-        public List<string> actors = new List<string>();
+        public string actor1;
+        public string actor2;
     }
 }

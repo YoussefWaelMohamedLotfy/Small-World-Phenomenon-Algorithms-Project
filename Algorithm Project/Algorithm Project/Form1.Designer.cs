@@ -39,13 +39,17 @@
             this.optimized_radioBtn = new System.Windows.Forms.RadioButton();
             this.outputTextBox = new System.Windows.Forms.TextBox();
             this.selectedTestCaseLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.startAnalysis_btn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.caseTwo_radioBtn = new System.Windows.Forms.RadioButton();
             this.caseOne_radioBtn = new System.Windows.Forms.RadioButton();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.largeQuery_radioButton = new System.Windows.Forms.RadioButton();
+            this.smallQuery_radioButton = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // sampleTest_btn
@@ -157,12 +161,12 @@
             // outputTextBox
             // 
             this.outputTextBox.BackColor = System.Drawing.Color.LightGray;
-            this.outputTextBox.Location = new System.Drawing.Point(8, 138);
+            this.outputTextBox.Location = new System.Drawing.Point(8, 184);
             this.outputTextBox.Multiline = true;
             this.outputTextBox.Name = "outputTextBox";
             this.outputTextBox.ReadOnly = true;
             this.outputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.outputTextBox.Size = new System.Drawing.Size(904, 435);
+            this.outputTextBox.Size = new System.Drawing.Size(904, 389);
             this.outputTextBox.TabIndex = 7;
             // 
             // selectedTestCaseLabel
@@ -174,15 +178,15 @@
             this.selectedTestCaseLabel.TabIndex = 8;
             this.selectedTestCaseLabel.Text = "Selected Test Case : None";
             // 
-            // button1
+            // startAnalysis_btn
             // 
-            this.button1.BackColor = System.Drawing.Color.Lime;
-            this.button1.Location = new System.Drawing.Point(49, 598);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 70);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Start Analysis";
-            this.button1.UseVisualStyleBackColor = false;
+            this.startAnalysis_btn.BackColor = System.Drawing.Color.Lime;
+            this.startAnalysis_btn.Location = new System.Drawing.Point(49, 598);
+            this.startAnalysis_btn.Name = "startAnalysis_btn";
+            this.startAnalysis_btn.Size = new System.Drawing.Size(92, 70);
+            this.startAnalysis_btn.TabIndex = 9;
+            this.startAnalysis_btn.Text = "Start Analysis";
+            this.startAnalysis_btn.UseVisualStyleBackColor = false;
             // 
             // groupBox3
             // 
@@ -220,14 +224,51 @@
             this.caseOne_radioBtn.Text = "Case 1";
             this.caseOne_radioBtn.UseVisualStyleBackColor = true;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.largeQuery_radioButton);
+            this.groupBox4.Controls.Add(this.smallQuery_radioButton);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Underline);
+            this.groupBox4.Location = new System.Drawing.Point(628, 118);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(284, 60);
+            this.groupBox4.TabIndex = 11;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Select Queries file";
+            // 
+            // largeQuery_radioButton
+            // 
+            this.largeQuery_radioButton.AutoSize = true;
+            this.largeQuery_radioButton.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.largeQuery_radioButton.Location = new System.Drawing.Point(131, 29);
+            this.largeQuery_radioButton.Name = "largeQuery_radioButton";
+            this.largeQuery_radioButton.Size = new System.Drawing.Size(70, 25);
+            this.largeQuery_radioButton.TabIndex = 1;
+            this.largeQuery_radioButton.TabStop = true;
+            this.largeQuery_radioButton.Text = "Large";
+            this.largeQuery_radioButton.UseVisualStyleBackColor = true;
+            // 
+            // smallQuery_radioButton
+            // 
+            this.smallQuery_radioButton.AutoSize = true;
+            this.smallQuery_radioButton.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.smallQuery_radioButton.Location = new System.Drawing.Point(18, 29);
+            this.smallQuery_radioButton.Name = "smallQuery_radioButton";
+            this.smallQuery_radioButton.Size = new System.Drawing.Size(69, 25);
+            this.smallQuery_radioButton.TabIndex = 0;
+            this.smallQuery_radioButton.TabStop = true;
+            this.smallQuery_radioButton.Text = "Small";
+            this.smallQuery_radioButton.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Linen;
             this.ClientSize = new System.Drawing.Size(929, 722);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.startAnalysis_btn);
             this.Controls.Add(this.selectedTestCaseLabel);
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.groupBox2);
@@ -244,6 +285,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,9 +305,12 @@
         private System.Windows.Forms.RadioButton optimized_radioBtn;
         private System.Windows.Forms.TextBox outputTextBox;
         private System.Windows.Forms.Label selectedTestCaseLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button startAnalysis_btn;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton caseTwo_radioBtn;
         private System.Windows.Forms.RadioButton caseOne_radioBtn;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton largeQuery_radioButton;
+        private System.Windows.Forms.RadioButton smallQuery_radioButton;
     }
 }
