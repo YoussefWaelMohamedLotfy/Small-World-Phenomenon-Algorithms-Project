@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Algorithm_Project
 {
+    /// <summary>
+    /// Node that acts as a vertex in the graph
+    /// </summary>
     public class Node
     {
         public string movie;

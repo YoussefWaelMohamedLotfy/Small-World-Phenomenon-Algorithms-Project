@@ -11,6 +11,6 @@ namespace Algorithm_Project
     /// </summary>
     class Algorithms
     {
-
+        
     }
 }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Algorithm_Project
 {
+    /// <summary>
+    /// The actors available in each query
+    /// </summary>
     public class QueriesActors
     {
         public string actor1;

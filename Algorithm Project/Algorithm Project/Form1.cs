@@ -14,7 +14,7 @@ namespace Algorithm_Project
     public partial class Form1 : Form
     {
         string testCase;
-        List<Node> my_data = new List<Node>();
+        List<Node> vertices = new List<Node>();
         List<QueriesActors> queriesActors = new List<QueriesActors>();
 
         public Form1()
@@ -136,13 +136,14 @@ namespace Algorithm_Project
         }
         #endregion
 
+        #region Reading from files
         /// <summary>
         /// Read movie file according to selected test case
         /// </summary>
         /// <param name="filePath">The path of the file to be read</param>
         private void ReadMoviesFile(string filePath)
         {
-            my_data.Clear();
+            vertices.Clear(); // Clear all objects in the List
 
             try
             {
@@ -161,7 +162,7 @@ namespace Algorithm_Project
                         temp.actors.Add(recordContent[i]);
                     }
 
-                    my_data.Add(temp);
+                    vertices.Add(temp);
                     //record = sr.ReadLine();
                 }
 
@@ -181,7 +182,7 @@ namespace Algorithm_Project
         /// <param name="filePath">The path of the file to be read</param>
         private void ReadQueriesFile(string filePath)
         {
-            queriesActors.Clear();
+            queriesActors.Clear(); // Clear all objects in the List
 
             try
             {
@@ -208,7 +209,7 @@ namespace Algorithm_Project
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
             }
         }
-
+        #endregion
 
     }
 }
