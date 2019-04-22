@@ -14,7 +14,7 @@ namespace Algorithm_Project
     public partial class Form1 : Form
     {
         string testCase;
-        List<Node> vertices = new List<Node>();
+        Dictionary<string, Dictionary<string, string>> adjacencyList = new Dictionary<string, Dictionary<string, string>>();
         List<QueriesActors> queriesActors = new List<QueriesActors>();
 
         public Form1()
@@ -27,7 +27,7 @@ namespace Algorithm_Project
         {
             testCase = "Sample";
             selectedTestCaseLabel.Text = "Selected Test Case : " + testCase;
-            ReadMoviesFile("Sample Test Cases/movies1.txt");
+            read_CreateAdjacencyList("Sample Test Cases/movies1.txt");
             ReadQueriesFile("Sample Test Cases/queries1.txt");
         }
 
@@ -38,11 +38,12 @@ namespace Algorithm_Project
 
             if (caseOne_radioBtn.Checked)
             {
-                ReadMoviesFile("Complete Test Cases/small/Case1/Movies193.txt");
+                read_CreateAdjacencyList("Complete Test Cases/small/Case1/Movies193.txt");
+
             }
             else if (caseTwo_radioBtn.Checked)
             {
-                ReadMoviesFile("Complete Test Cases/small/Case2/Movies187.txt");
+                read_CreateAdjacencyList("Complete Test Cases/small/Case2/Movies187.txt");
             }
             else
             {
@@ -58,11 +59,11 @@ namespace Algorithm_Project
 
             if (caseOne_radioBtn.Checked)
             {
-                ReadMoviesFile("Complete Test Cases/medium/Case1/Movies967.txt");
+                read_CreateAdjacencyList("Complete Test Cases/medium/Case1/Movies967.txt");
             }
             else if (caseTwo_radioBtn.Checked)
             {
-                ReadMoviesFile("Complete Test Cases/medium/Case2/Movies4736.txt");
+                read_CreateAdjacencyList("Complete Test Cases/medium/Case2/Movies4736.txt");
             }
             else
             {
@@ -99,8 +100,7 @@ namespace Algorithm_Project
         {
             testCase = "Large";
             selectedTestCaseLabel.Text = "Selected Test Case : " + testCase;
-            ReadMoviesFile("Complete Test Cases/large/Movies14129.txt");
-
+            read_CreateAdjacencyList("Complete Test Cases/large/Movies14129.txt");
             if (smallQuery_radioButton.Checked)
             {
                 ReadQueriesFile("Complete Test Cases/large/queries26.txt");
@@ -119,8 +119,7 @@ namespace Algorithm_Project
         {
             testCase = "Extreme";
             selectedTestCaseLabel.Text = "Selected Test Case : " + testCase;
-            ReadMoviesFile("Complete Test Cases/extreme/Movies122806.txt");
-
+            read_CreateAdjacencyList("Complete Test Cases/extreme/Movies122806.txt");
             if (smallQuery_radioButton.Checked)
             {
                 ReadQueriesFile("Complete Test Cases/extreme/queries22.txt");
@@ -136,15 +135,14 @@ namespace Algorithm_Project
         }
         #endregion
 
-        #region Reading from files
+        #region Reading from files and creat the AdjacencyList
         /// <summary>
-        /// Read movie file according to selected test case
+        /// Read movie file according to selected test case and creat the adjacency list
         /// </summary>
         /// <param name="filePath">The path of the file to be read</param>
-        private void ReadMoviesFile(string filePath)
+        private void read_CreateAdjacencyList(string filePath)
         {
-            vertices.Clear(); // Clear all objects in the List
-
+            adjacencyList.Clear(); // Clear all objects in the List
             try
             {
                 FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
@@ -154,16 +152,26 @@ namespace Algorithm_Project
                 {
                     string record = sr.ReadLine();
                     string[] recordContent = record.Split('/');
-                    Node temp = new Node();
-                    temp.movie = recordContent[0];
-
+                    string movie;
+                    movie = recordContent[0];
                     for (int i = 1; i < recordContent.Length; i++)
                     {
-                        temp.actors.Add(recordContent[i]);
+                        if (!adjacencyList.ContainsKey(recordContent[i]))
+                        {
+                            adjacencyList[recordContent[i]] = new Dictionary<string, string>();
+                        }
+                        for (int j = 1; j < recordContent.Length; j++)
+                        {
+                            if (adjacencyList[recordContent[i]].ContainsKey(recordContent[j]) && recordContent[i] != recordContent[j])
+                            {
+                                adjacencyList[recordContent[i]][recordContent[j]] += "/" + movie;
+                            }
+                            else if (!adjacencyList[recordContent[i]].ContainsKey(recordContent[j]) && recordContent[i] != recordContent[j])
+                            {
+                                adjacencyList[recordContent[i]].Add(recordContent[j], movie);
+                            }
+                        }
                     }
-
-                    vertices.Add(temp);
-                    //record = sr.ReadLine();
                 }
 
                 MessageBox.Show("Reading Complete from " + filePath);
@@ -210,6 +218,5 @@ namespace Algorithm_Project
             }
         }
         #endregion
-
     }
 }
