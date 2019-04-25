@@ -15,6 +15,7 @@ namespace Algorithm_Project
     {
         string testCase;
         Dictionary<string, Dictionary<string, string>> adjacencyList = new Dictionary<string, Dictionary<string, string>>();
+        Dictionary<string, bool> vistedNode = new Dictionary<string, bool>();
         List<QueriesActors> queriesActors = new List<QueriesActors>();
 
         public Form1()
@@ -159,6 +160,7 @@ namespace Algorithm_Project
                         if (!adjacencyList.ContainsKey(recordContent[i]))
                         {
                             adjacencyList[recordContent[i]] = new Dictionary<string, string>();
+                            vistedNode.Add(recordContent[i], false);
                         }
                         for (int j = 1; j < recordContent.Length; j++)
                         {
