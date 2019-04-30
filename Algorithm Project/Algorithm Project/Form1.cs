@@ -212,7 +212,6 @@ namespace Algorithm_Project
             {
                 FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 StreamReader sr = new StreamReader(fs);
-                string result = "" ;
                 while (sr.Peek() != -1)
                 {
                     string record = sr.ReadLine();
@@ -220,24 +219,9 @@ namespace Algorithm_Project
                     QueriesActors temp = new QueriesActors();
                     temp.actor1 = recordContent[0];
                     temp.actor2 = recordContent[1];
-                    Algorithms.BFS_Algorithm(adjacencyList,checkNode, temp.actor1, temp.actor2);
-                    result +=  "DoS = " + checkNode[temp.actor2].distance + ", RS = " + checkNode[temp.actor2].Undirect_Freq + "\n";
-                    string Actor = temp.actor2;
-                    string Path_Of_Actors = Actor;
-                    string Path = "" , Parent;
-                    while (Actor != temp.actor1)
-                    {
-                        Parent = checkNode[Actor].Parent;
-                        Path_Of_Actors =  Parent +"->" + Path_Of_Actors;
-                        Path =  adjacencyList[Actor][Parent].Common_Movie + "->" + Path;
-                        Actor = Parent;
-                    }
-                    result += "Chain Of Movies :" + Path + "\n";
-                    result += "Chain Of Actors :" + Path_Of_Actors + "\n";
                     queriesActors.Add(temp);
                     //record = sr.ReadLine();
                 }
-                ResultText.Text = result;
                 MessageBox.Show("Reading Complete from " + filePath);
                 fs.Close();
                 sr.Close();
@@ -251,9 +235,29 @@ namespace Algorithm_Project
 
         private void startAnalysis_btn_Click(object sender, EventArgs e)
         {
-            
+            string result = "";
+
+            for (int i = 0; i < queriesActors.Count; i++)
+            {
+                Algorithms.BFS_Algorithm(adjacencyList, checkNode, queriesActors[i].actor1, queriesActors[i].actor2);
+                result += "DoS = " + checkNode[queriesActors[i].actor2].distance + ", RS = " + checkNode[queriesActors[i].actor2].Undirect_Freq + "\n";
+                string Actor = queriesActors[i].actor2;
+                string Path_Of_Actors = Actor;
+                string Path = "", Parent;
+                while (Actor != queriesActors[i].actor1)
+                {
+                    Parent = checkNode[Actor].Parent;
+                    Path_Of_Actors = Parent + "->" + Path_Of_Actors;
+                    Path = adjacencyList[Actor][Parent].Common_Movie + "->" + Path;
+                    Actor = Parent;
+                }
+                result += "Chain Of Movies :" + Path + "\n";
+                result += "Chain Of Actors :" + Path_Of_Actors + "\n";
+            }
+
+            ResultText.Text = result;
         }
 
-        
+
     }
 }
