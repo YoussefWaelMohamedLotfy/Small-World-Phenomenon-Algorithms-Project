@@ -11,8 +11,11 @@ namespace Algorithm_Project
     /// </summary>
     class Algorithms
     {
-
-        private  static void intialize(Dictionary<string, path> vertex)
+        /// <summary>
+        /// Set all values to their initial states (Either empty or null)
+        /// </summary>
+        /// <param name="vertex"></param>
+        private static void Intialize(Dictionary<string, path> vertex)
         {
             foreach (string key in vertex.Keys)                         //Θ(V)
             {
@@ -23,9 +26,16 @@ namespace Algorithm_Project
             }
         }
 
-        public static void  BFS_Algorithm(Dictionary<string, Dictionary<string, Relation_str>> adjacencyList, Dictionary<string, path> vertex, string source, string destination)
+        /// <summary>
+        /// Breadth First Search Algorithm Implementation
+        /// </summary>
+        /// <param name="adjacencyList">The list that stores all data</param>
+        /// <param name="vertex"></param>
+        /// <param name="source">The first name in query</param>
+        /// <param name="destination">The second name in query</param>
+        public static void BFS_Algorithm(Dictionary<string, Dictionary<string, Relation_str>> adjacencyList, Dictionary<string, path> vertex, string source, string destination)
         {
-            intialize(vertex);                                     //Θ(V) Touch Or Visit every vertex in Graph. 
+            Intialize(vertex);                                     //Θ(V) Touch Or Visit every vertex in Graph. 
             Queue<string> nodes = new Queue<string>();             
             nodes.Enqueue(source);                                 //O(1) put the source in the queue.
             vertex[source].VisitedNode = true;                     //Θ(1) make source visited (true).

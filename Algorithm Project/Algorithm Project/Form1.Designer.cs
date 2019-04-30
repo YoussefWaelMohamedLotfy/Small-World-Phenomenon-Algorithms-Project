@@ -46,6 +46,8 @@
             this.largeQuery_radioButton = new System.Windows.Forms.RadioButton();
             this.smallQuery_radioButton = new System.Windows.Forms.RadioButton();
             this.ResultText = new System.Windows.Forms.RichTextBox();
+            this.stopWatchText = new System.Windows.Forms.TextBox();
+            this.clearAllData_Btn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -259,12 +261,35 @@
             this.ResultText.TabIndex = 12;
             this.ResultText.Text = "";
             // 
+            // stopWatchText
+            // 
+            this.stopWatchText.Enabled = false;
+            this.stopWatchText.Location = new System.Drawing.Point(340, 129);
+            this.stopWatchText.Name = "stopWatchText";
+            this.stopWatchText.ReadOnly = true;
+            this.stopWatchText.Size = new System.Drawing.Size(236, 29);
+            this.stopWatchText.TabIndex = 13;
+            this.stopWatchText.Text = "0 ms";
+            // 
+            // clearAllData_Btn
+            // 
+            this.clearAllData_Btn.BackColor = System.Drawing.Color.Red;
+            this.clearAllData_Btn.Location = new System.Drawing.Point(174, 598);
+            this.clearAllData_Btn.Name = "clearAllData_Btn";
+            this.clearAllData_Btn.Size = new System.Drawing.Size(92, 70);
+            this.clearAllData_Btn.TabIndex = 14;
+            this.clearAllData_Btn.Text = "Clear all data";
+            this.clearAllData_Btn.UseVisualStyleBackColor = false;
+            this.clearAllData_Btn.Click += new System.EventHandler(this.ClearAllData_Btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Linen;
             this.ClientSize = new System.Drawing.Size(929, 722);
+            this.Controls.Add(this.clearAllData_Btn);
+            this.Controls.Add(this.stopWatchText);
             this.Controls.Add(this.ResultText);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -311,5 +336,7 @@
         private System.Windows.Forms.RadioButton largeQuery_radioButton;
         private System.Windows.Forms.RadioButton smallQuery_radioButton;
         private System.Windows.Forms.RichTextBox ResultText;
+        private System.Windows.Forms.TextBox stopWatchText;
+        private System.Windows.Forms.Button clearAllData_Btn;
     }
 }

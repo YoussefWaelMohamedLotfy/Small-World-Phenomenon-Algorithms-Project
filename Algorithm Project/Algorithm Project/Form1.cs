@@ -6,18 +6,19 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
 
 namespace Algorithm_Project
 {
-    
     public partial class Form1 : Form
     {
         string testCase;
         Dictionary<string, Dictionary<string, Relation_str>> adjacencyList = new Dictionary<string, Dictionary<string, Relation_str>>();
         Dictionary<string, path> checkNode = new Dictionary<string, path>();
         List<QueriesActors> queriesActors = new List<QueriesActors>();
+        Stopwatch stopwatch = new Stopwatch();
         
         public Form1()
         {
@@ -47,7 +48,7 @@ namespace Algorithm_Project
             else if (caseTwo_radioBtn.Checked)
             {
                 read_CreateAdjacencyList("Complete Test Cases/small/Case2/Movies187.txt");
-                ReadQueriesFile("Complete Test Cases/small/Case1/queries50.txt");
+                ReadQueriesFile("Complete Test Cases/small/Case2/queries50.txt");
             }
             else
             {
@@ -156,7 +157,6 @@ namespace Algorithm_Project
         /// <param name="filePath">The path of the file to be read</param>
         private void read_CreateAdjacencyList(string filePath)
         {
-            adjacencyList.Clear(); // Clear all objects in the List
             try
             {
                 FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
@@ -206,8 +206,6 @@ namespace Algorithm_Project
         /// <param name="filePath">The path of the file to be read</param>
         private void ReadQueriesFile(string filePath)
         {
-            queriesActors.Clear(); // Clear all objects in the List
-
             try
             {
                 FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
@@ -235,6 +233,7 @@ namespace Algorithm_Project
 
         private void startAnalysis_btn_Click(object sender, EventArgs e)
         {
+            stopwatch.Start();
             string result = "";
 
             for (int i = 0; i < queriesActors.Count; i++)
@@ -244,20 +243,34 @@ namespace Algorithm_Project
                 string Actor = queriesActors[i].actor2;
                 string Path_Of_Actors = Actor;
                 string Path = "", Parent;
+
                 while (Actor != queriesActors[i].actor1)
                 {
                     Parent = checkNode[Actor].Parent;
-                    Path_Of_Actors = Parent + "->" + Path_Of_Actors;
-                    Path = adjacencyList[Actor][Parent].Common_Movie + "->" + Path;
+                    Path_Of_Actors = Parent + "=>" + Path_Of_Actors;
+                    Path = adjacencyList[Actor][Parent].Common_Movie + "=>" + Path;
                     Actor = Parent;
                 }
-                result += "Chain Of Movies :" + Path + "\n";
-                result += "Chain Of Actors :" + Path_Of_Actors + "\n";
+
+                result += "CHAIN OF ACTORS : " + Path_Of_Actors + "\n";
+                result += "CHAIN OF MOVIES : " + Path + "\n\n";
             }
 
             ResultText.Text = result;
+            stopwatch.Stop();
+            stopWatchText.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
         }
 
-
+        private void ClearAllData_Btn_Click(object sender, EventArgs e)
+        {
+            adjacencyList.Clear();
+            checkNode.Clear();
+            queriesActors.Clear();
+            ResultText.Text = "";
+            stopWatchText.Text = "0 ms";
+            testCase = "";
+            selectedTestCaseLabel.Text = "Selected Test Case : None";
+            stopwatch.Reset();
+        }
     }
 }
