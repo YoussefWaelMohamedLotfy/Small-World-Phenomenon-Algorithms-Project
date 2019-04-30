@@ -11,13 +11,14 @@ using System.IO;
 
 namespace Algorithm_Project
 {
+    
     public partial class Form1 : Form
     {
         string testCase;
-        Dictionary<string, Dictionary<string, string>> adjacencyList = new Dictionary<string, Dictionary<string, string>>();
-        Dictionary<string, bool> vistedNode = new Dictionary<string, bool>();
+        Dictionary<string, Dictionary<string, Relation_str>> adjacencyList = new Dictionary<string, Dictionary<string, Relation_str>>();
+        Dictionary<string, path> checkNode = new Dictionary<string, path>();
         List<QueriesActors> queriesActors = new List<QueriesActors>();
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -40,11 +41,13 @@ namespace Algorithm_Project
             if (caseOne_radioBtn.Checked)
             {
                 read_CreateAdjacencyList("Complete Test Cases/small/Case1/Movies193.txt");
+                ReadQueriesFile("Complete Test Cases/small/Case1/queries110.txt");
 
             }
             else if (caseTwo_radioBtn.Checked)
             {
                 read_CreateAdjacencyList("Complete Test Cases/small/Case2/Movies187.txt");
+                ReadQueriesFile("Complete Test Cases/small/Case1/queries50.txt");
             }
             else
             {
@@ -60,11 +63,17 @@ namespace Algorithm_Project
 
             if (caseOne_radioBtn.Checked)
             {
+                adjacencyList.Clear();
+                checkNode.Clear();
                 read_CreateAdjacencyList("Complete Test Cases/medium/Case1/Movies967.txt");
+                
             }
             else if (caseTwo_radioBtn.Checked)
             {
+                adjacencyList.Clear();
+                checkNode.Clear();
                 read_CreateAdjacencyList("Complete Test Cases/medium/Case2/Movies4736.txt");
+
             }
             else
             {
@@ -101,6 +110,8 @@ namespace Algorithm_Project
         {
             testCase = "Large";
             selectedTestCaseLabel.Text = "Selected Test Case : " + testCase;
+            adjacencyList.Clear();
+            checkNode.Clear();
             read_CreateAdjacencyList("Complete Test Cases/large/Movies14129.txt");
             if (smallQuery_radioButton.Checked)
             {
@@ -120,6 +131,8 @@ namespace Algorithm_Project
         {
             testCase = "Extreme";
             selectedTestCaseLabel.Text = "Selected Test Case : " + testCase;
+            adjacencyList.Clear();
+            checkNode.Clear();
             read_CreateAdjacencyList("Complete Test Cases/extreme/Movies122806.txt");
             if (smallQuery_radioButton.Checked)
             {
@@ -136,9 +149,9 @@ namespace Algorithm_Project
         }
         #endregion
 
-        #region Reading from files and creat the AdjacencyList
+        #region Reading from files and create the Adjacency List
         /// <summary>
-        /// Read movie file according to selected test case and creat the adjacency list
+        /// Read movie file according to selected test case and create the adjacency list
         /// </summary>
         /// <param name="filePath">The path of the file to be read</param>
         private void read_CreateAdjacencyList(string filePath)
@@ -159,18 +172,19 @@ namespace Algorithm_Project
                     {
                         if (!adjacencyList.ContainsKey(recordContent[i]))
                         {
-                            adjacencyList[recordContent[i]] = new Dictionary<string, string>();
-                            vistedNode.Add(recordContent[i], false);
+                            adjacencyList[recordContent[i]] = new Dictionary<string, Relation_str>();
+                            checkNode.Add(recordContent[i], new path());
                         }
                         for (int j = 1; j < recordContent.Length; j++)
                         {
                             if (adjacencyList[recordContent[i]].ContainsKey(recordContent[j]) && recordContent[i] != recordContent[j])
                             {
-                                adjacencyList[recordContent[i]][recordContent[j]] += "/" + movie;
+                                adjacencyList[recordContent[i]][recordContent[j]].Direct_Freq++;
+
                             }
                             else if (!adjacencyList[recordContent[i]].ContainsKey(recordContent[j]) && recordContent[i] != recordContent[j])
                             {
-                                adjacencyList[recordContent[i]].Add(recordContent[j], movie);
+                                adjacencyList[recordContent[i]].Add(recordContent[j], new Relation_str(movie));
                             }
                         }
                     }
@@ -198,7 +212,7 @@ namespace Algorithm_Project
             {
                 FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 StreamReader sr = new StreamReader(fs);
-
+                string result = "" ;
                 while (sr.Peek() != -1)
                 {
                     string record = sr.ReadLine();
@@ -206,10 +220,24 @@ namespace Algorithm_Project
                     QueriesActors temp = new QueriesActors();
                     temp.actor1 = recordContent[0];
                     temp.actor2 = recordContent[1];
+                    Algorithms.BFS_Algorithm(adjacencyList,checkNode, temp.actor1, temp.actor2);
+                    result +=  "DoS = " + checkNode[temp.actor2].distance + ", RS = " + checkNode[temp.actor2].Undirect_Freq + "\n";
+                    string Actor = temp.actor2;
+                    string Path_Of_Actors = Actor;
+                    string Path = "" , Parent;
+                    while (Actor != temp.actor1)
+                    {
+                        Parent = checkNode[Actor].Parent;
+                        Path_Of_Actors =  Parent +"->" + Path_Of_Actors;
+                        Path =  adjacencyList[Actor][Parent].Common_Movie + "->" + Path;
+                        Actor = Parent;
+                    }
+                    result += "Chain Of Movies :" + Path + "\n";
+                    result += "Chain Of Actors :" + Path_Of_Actors + "\n";
                     queriesActors.Add(temp);
                     //record = sr.ReadLine();
                 }
-
+                ResultText.Text = result;
                 MessageBox.Show("Reading Complete from " + filePath);
                 fs.Close();
                 sr.Close();
@@ -220,5 +248,12 @@ namespace Algorithm_Project
             }
         }
         #endregion
+
+        private void startAnalysis_btn_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        
     }
 }

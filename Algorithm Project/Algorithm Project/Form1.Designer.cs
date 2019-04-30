@@ -37,7 +37,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.nonOptimized_radioBtn = new System.Windows.Forms.RadioButton();
             this.optimized_radioBtn = new System.Windows.Forms.RadioButton();
-            this.outputTextBox = new System.Windows.Forms.TextBox();
             this.selectedTestCaseLabel = new System.Windows.Forms.Label();
             this.startAnalysis_btn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -46,6 +45,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.largeQuery_radioButton = new System.Windows.Forms.RadioButton();
             this.smallQuery_radioButton = new System.Windows.Forms.RadioButton();
+            this.ResultText = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -158,17 +158,6 @@
             this.optimized_radioBtn.Text = "Optimized";
             this.optimized_radioBtn.UseVisualStyleBackColor = true;
             // 
-            // outputTextBox
-            // 
-            this.outputTextBox.BackColor = System.Drawing.Color.LightGray;
-            this.outputTextBox.Location = new System.Drawing.Point(8, 184);
-            this.outputTextBox.Multiline = true;
-            this.outputTextBox.Name = "outputTextBox";
-            this.outputTextBox.ReadOnly = true;
-            this.outputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.outputTextBox.Size = new System.Drawing.Size(904, 389);
-            this.outputTextBox.TabIndex = 7;
-            // 
             // selectedTestCaseLabel
             // 
             this.selectedTestCaseLabel.AutoSize = true;
@@ -187,6 +176,7 @@
             this.startAnalysis_btn.TabIndex = 9;
             this.startAnalysis_btn.Text = "Start Analysis";
             this.startAnalysis_btn.UseVisualStyleBackColor = false;
+            this.startAnalysis_btn.Click += new System.EventHandler(this.startAnalysis_btn_Click);
             // 
             // groupBox3
             // 
@@ -260,17 +250,26 @@
             this.smallQuery_radioButton.Text = "Small";
             this.smallQuery_radioButton.UseVisualStyleBackColor = true;
             // 
+            // ResultText
+            // 
+            this.ResultText.Location = new System.Drawing.Point(8, 184);
+            this.ResultText.Name = "ResultText";
+            this.ResultText.ReadOnly = true;
+            this.ResultText.Size = new System.Drawing.Size(898, 408);
+            this.ResultText.TabIndex = 12;
+            this.ResultText.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Linen;
             this.ClientSize = new System.Drawing.Size(929, 722);
+            this.Controls.Add(this.ResultText);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.startAnalysis_btn);
             this.Controls.Add(this.selectedTestCaseLabel);
-            this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.sampleTest_btn);
@@ -303,7 +302,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton nonOptimized_radioBtn;
         private System.Windows.Forms.RadioButton optimized_radioBtn;
-        private System.Windows.Forms.TextBox outputTextBox;
         private System.Windows.Forms.Label selectedTestCaseLabel;
         private System.Windows.Forms.Button startAnalysis_btn;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -312,5 +310,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton largeQuery_radioButton;
         private System.Windows.Forms.RadioButton smallQuery_radioButton;
+        private System.Windows.Forms.RichTextBox ResultText;
     }
 }
