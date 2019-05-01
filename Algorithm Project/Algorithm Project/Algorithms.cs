@@ -15,7 +15,7 @@ namespace Algorithm_Project
         /// Set all values to their initial states (Either empty or null)
         /// </summary>
         /// <param name="vertex"></param>
-        private static void Intialize(Dictionary<string, path> vertex)
+        private static void Intialize(Dictionary<string, path> vertex)  //Θ(V)
         {
             foreach (string key in vertex.Keys)                         //Θ(V)
             {
@@ -33,41 +33,41 @@ namespace Algorithm_Project
         /// <param name="vertex"></param>
         /// <param name="source">The first name in query</param>
         /// <param name="destination">The second name in query</param>
-        public static void BFS_Algorithm(Dictionary<string, Dictionary<string, Relation_str>> adjacencyList, Dictionary<string, path> vertex, string source, string destination)
+        public static void BFS_Algorithm(Dictionary<string, Dictionary<string, Relation_str>> adjacencyList, Dictionary<string, path> vertex, string source, string destination) //Total Complexity of this function => Θ(V + E)
         {
             Intialize(vertex);                                     //Θ(V) Touch Or Visit every vertex in Graph. 
-            Queue<string> nodes = new Queue<string>();             
+            Queue<string> nodes = new Queue<string>();             //Θ(1)
             nodes.Enqueue(source);                                 //O(1) put the source in the queue.
             vertex[source].VisitedNode = true;                     //Θ(1) make source visited (true).
             vertex[source].distance = 0;                           //Θ(1) make distance of source equal to zero.
             vertex[source].Undirect_Freq = 0;                      //Θ(1) make freq of source equal to zero.
-            while (nodes.Count() != 0)                             
+            while (nodes.Count() != 0)                             //Θ(V)
             {
                 string front = nodes.Dequeue();                   //Θ(V) Visit every vertex and dequeue it from queue.
 
                 foreach (string key in adjacencyList[front].Keys) //Θ(adjacencyList[front])
-                {
-                    if(vertex[key].VisitedNode == false)
+                {                                                 // this nested loop will iterate a max of E times.                                                                                                                                                
+                    if(vertex[key].VisitedNode == false)          //Θ(1)
                     {
                         nodes.Enqueue(key);                       //Θ(1) put node in the queue.                                                                                                     
-                        vertex[key].VisitedNode = true;           //after putting node in queue that is mean we visited it and make it true.                                                           
-                        vertex[key].Parent = front;               //make the parent of vertex equal to front. Θ(1)                                                                                       
-                        vertex[key].distance = vertex[front].distance + 1; // calculate DOS (Degree Of Separation) between source and destination.                                                       
-                        vertex[key].Undirect_Freq = vertex[front].Undirect_Freq + adjacencyList[front][key].Direct_Freq;//calculate RS(Relation Strength) with undirect way between source and destination.       
+                        vertex[key].VisitedNode = true;           //Θ(1)after putting node in queue that is mean we visited it and make it true.                                                           
+                        vertex[key].Parent = front;               //Θ(1)make the parent of vertex equal to front.                                                                                        
+                        vertex[key].distance = vertex[front].distance + 1; //Θ(1)calculate DOS (Degree Of Separation) between source and destination.                                                       
+                        vertex[key].Undirect_Freq = vertex[front].Undirect_Freq + adjacencyList[front][key].Direct_Freq;//Θ(E)calculate RS(Relation Strength) with undirect way between source and destination.       
                         if(vertex[key].distance > vertex[destination].distance)// if distance of node grater than distance of destination break from the loop.                                            
                         {                                                                                                                                                                                       
-                            nodes.Clear(); //Θ(V)                                                                                                                                                          
+                            nodes.Clear(); //Θ(1)                                                                                                                                                          
                             break;                                                                                                                                                                      
                         }                                                                                                                                                                        
                     }                                                                                                                                                                              
-                    else if(vertex[front].distance + 1 == vertex[key].distance) 
-                    {
-                        if(vertex[key].Undirect_Freq < vertex[front].Undirect_Freq + adjacencyList[front][key].Direct_Freq)
-                        {
-                            vertex[key].Undirect_Freq = vertex[front].Undirect_Freq + adjacencyList[front][key].Direct_Freq;
-                            vertex[key].Parent = front;
-                        }
-                    }
+                   // else if(vertex[front].distance + 1 == vertex[key].distance) 
+                    //{
+                      //  if(vertex[key].Undirect_Freq < vertex[front].Undirect_Freq + adjacencyList[front][key].Direct_Freq)
+                        //{
+                          //  vertex[key].Undirect_Freq = vertex[front].Undirect_Freq + adjacencyList[front][key].Direct_Freq;//Θ(1)
+                          //  vertex[key].Parent = front;//Θ(1)
+                       // }
+                    //}
                 }
             }
         }
