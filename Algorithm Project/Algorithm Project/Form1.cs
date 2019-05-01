@@ -155,44 +155,44 @@ namespace Algorithm_Project
         /// Read movie file according to selected test case and create the adjacency list
         /// </summary>
         /// <param name="filePath">The path of the file to be read</param>
-        private void read_CreateAdjacencyList(string filePath)
+        private void read_CreateAdjacencyList(string filePath) 
         {
             try
             {
                 FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 StreamReader sr = new StreamReader(fs);
 
-                while (sr.Peek() != -1)
+                while (sr.Peek() != -1)    //Θ(J * n * k^2) assume J stands for number of records within the file
                 {
-                    string record = sr.ReadLine();
-                    string[] recordContent = record.Split('/');
-                    string movie;
-                    movie = recordContent[0];
-                    for (int i = 1; i < recordContent.Length; i++)
+                    string record = sr.ReadLine();                  //Θ(1)
+                    string[] recordContent = record.Split('/');     //Θ(n)
+                    string movie;                                   //Θ(1)
+                    movie = recordContent[0];                       //Θ(1)
+                    for (int i = 1; i < recordContent.Length; i++)  //Θ(n * k^2) assume k stands for length of the list(recordContent)
                     {
-                        if (!adjacencyList.ContainsKey(recordContent[i]))
+                        if (!adjacencyList.ContainsKey(recordContent[i]))    //Θ(n) assume n stands for number of elements in the (adjacencyList)
                         {
-                            adjacencyList[recordContent[i]] = new Dictionary<string, Relation_str>();
-                            checkNode.Add(recordContent[i], new path());
+                            adjacencyList[recordContent[i]] = new Dictionary<string, Relation_str>();  //Θ(1)
+                            checkNode.Add(recordContent[i], new path());                           //Θ(1)
                         }
-                        for (int j = 1; j < recordContent.Length; j++)
+                        for (int j = 1; j < recordContent.Length; j++) //Θ(n * k) assume k stands for length of the list(recordContent)
                         {
-                            if (adjacencyList[recordContent[i]].ContainsKey(recordContent[j]) && recordContent[i] != recordContent[j])
+                            if (adjacencyList[recordContent[i]].ContainsKey(recordContent[j]) && recordContent[i] != recordContent[j])   //Θ(n) Check if that key existe 
                             {
-                                adjacencyList[recordContent[i]][recordContent[j]].Direct_Freq++;
+                                adjacencyList[recordContent[i]][recordContent[j]].Direct_Freq++;     //Θ(1)increament the Relation Strength
 
                             }
-                            else if (!adjacencyList[recordContent[i]].ContainsKey(recordContent[j]) && recordContent[i] != recordContent[j])
+                            else if (!adjacencyList[recordContent[i]].ContainsKey(recordContent[j]) && recordContent[i] != recordContent[j])//Θ(n) 
                             {
-                                adjacencyList[recordContent[i]].Add(recordContent[j], new Relation_str(movie));
+                                adjacencyList[recordContent[i]].Add(recordContent[j], new Relation_str(movie));    //Θ(1) 
                             }
                         }
                     }
                 }
 
                 MessageBox.Show("Reading Complete from " + filePath);
-                fs.Close();
-                sr.Close();
+                fs.Close();      //Θ(1)
+                sr.Close();      //Θ(1)
             }
             catch (Exception ex)
             {
@@ -212,17 +212,16 @@ namespace Algorithm_Project
                 StreamReader sr = new StreamReader(fs);
                 while (sr.Peek() != -1)
                 {
-                    string record = sr.ReadLine();
-                    string[] recordContent = record.Split('/');
-                    QueriesActors temp = new QueriesActors();
-                    temp.actor1 = recordContent[0];
-                    temp.actor2 = recordContent[1];
-                    queriesActors.Add(temp);
-                    //record = sr.ReadLine();
+                    string record = sr.ReadLine();      //Θ(1)
+                    string[] recordContent = record.Split('/');   //Θ(n)
+                    QueriesActors temp = new QueriesActors();     //Θ(1)
+                    temp.actor1 = recordContent[0];     //Θ(1)
+                    temp.actor2 = recordContent[1];     //Θ(1)
+                    queriesActors.Add(temp);   //Θ(1) or Θ(n) if the list need to be extended
                 }
                 MessageBox.Show("Reading Complete from " + filePath);
-                fs.Close();
-                sr.Close();
+                fs.Close();    //Θ(1)
+                sr.Close();    //Θ(1)
             }
             catch (Exception ex)
             {
@@ -233,44 +232,44 @@ namespace Algorithm_Project
 
         private void startAnalysis_btn_Click(object sender, EventArgs e)
         {
-            stopwatch.Start();
-            string result = "";
+            stopwatch.Start();   //Θ(1)
+            string result = "";   //Θ(1)
 
-            for (int i = 0; i < queriesActors.Count; i++)
+            for (int i = 0; i < queriesActors.Count; i++)    //  //Θ(n) assume n stands for number of elements in the (queriesActors)
             {
                 Algorithms.BFS_Algorithm(adjacencyList, checkNode, queriesActors[i].actor1, queriesActors[i].actor2);
-                result += "DoS = " + checkNode[queriesActors[i].actor2].distance + ", RS = " + checkNode[queriesActors[i].actor2].Undirect_Freq + "\n";
-                string Actor = queriesActors[i].actor2;
-                string Path_Of_Actors = Actor;
-                string Path = "", Parent;
+                result += "DoS = " + checkNode[queriesActors[i].actor2].distance + ", RS = " + checkNode[queriesActors[i].actor2].Undirect_Freq + "\n";  //Θ(1)
+                string Actor = queriesActors[i].actor2;  //Θ(1)
+                string Path_Of_Actors = Actor;   //Θ(1)
+                string Path = "", Parent;  //Θ(1)
 
-                while (Actor != queriesActors[i].actor1)
+                while (Actor != queriesActors[i].actor1)    //can not be determined
                 {
-                    Parent = checkNode[Actor].Parent;
-                    Path_Of_Actors = Parent + "=>" + Path_Of_Actors;
-                    Path = adjacencyList[Actor][Parent].Common_Movie + "=>" + Path;
-                    Actor = Parent;
+                    Parent = checkNode[Actor].Parent;  //Θ(1)  
+                    Path_Of_Actors = Parent + "=>" + Path_Of_Actors;   //Θ(1)
+                    Path = adjacencyList[Actor][Parent].Common_Movie + "=>" + Path;   //Θ(1)
+                    Actor = Parent;   //Θ(1)
                 }
 
-                result += "CHAIN OF ACTORS : " + Path_Of_Actors + "\n";
-                result += "CHAIN OF MOVIES : " + Path + "\n\n";
-            }
+                result += "CHAIN OF ACTORS : " + Path_Of_Actors + "\n";   //Θ(1)
+                result += "CHAIN OF MOVIES : " + Path + "\n\n";     //Θ(1)
+            }  
 
-            ResultText.Text = result;
-            stopwatch.Stop();
-            stopWatchText.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+            ResultText.Text = result;   //Θ(1)
+            stopwatch.Stop();   //Θ(1)
+            stopWatchText.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";   //Θ(1)
         }
 
         private void ClearAllData_Btn_Click(object sender, EventArgs e)
         {
-            adjacencyList.Clear();
-            checkNode.Clear();
-            queriesActors.Clear();
-            ResultText.Text = "";
-            stopWatchText.Text = "0 ms";
-            testCase = "";
-            selectedTestCaseLabel.Text = "Selected Test Case : None";
-            stopwatch.Reset();
+            adjacencyList.Clear();   //Θ(1)
+            checkNode.Clear();   //Θ(1)
+            queriesActors.Clear();   //Θ(1)
+            ResultText.Text = "";   //Θ(1)
+            stopWatchText.Text = "0 ms";   //Θ(1)
+            testCase = "";   //Θ(1)
+            selectedTestCaseLabel.Text = "Selected Test Case : None";   //Θ(1)
+            stopwatch.Reset();   //Θ(1)
         }
     }
 }
