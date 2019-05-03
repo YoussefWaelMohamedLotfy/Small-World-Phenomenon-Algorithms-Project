@@ -48,10 +48,21 @@
             this.ResultText = new System.Windows.Forms.RichTextBox();
             this.stopWatchText = new System.Windows.Forms.TextBox();
             this.clearAllData_Btn = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.mainTab = new System.Windows.Forms.TabPage();
+            this.bonusTab = new System.Windows.Forms.TabPage();
+            this.bonusResultText = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.actorName_txt = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.mainTab.SuspendLayout();
+            this.bonusTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // sampleTest_btn
@@ -172,7 +183,7 @@
             // startAnalysis_btn
             // 
             this.startAnalysis_btn.BackColor = System.Drawing.Color.Lime;
-            this.startAnalysis_btn.Location = new System.Drawing.Point(49, 598);
+            this.startAnalysis_btn.Location = new System.Drawing.Point(8, 640);
             this.startAnalysis_btn.Name = "startAnalysis_btn";
             this.startAnalysis_btn.Size = new System.Drawing.Size(92, 70);
             this.startAnalysis_btn.TabIndex = 9;
@@ -254,27 +265,27 @@
             // 
             // ResultText
             // 
-            this.ResultText.Location = new System.Drawing.Point(8, 184);
+            this.ResultText.Location = new System.Drawing.Point(3, 6);
             this.ResultText.Name = "ResultText";
             this.ResultText.ReadOnly = true;
-            this.ResultText.Size = new System.Drawing.Size(898, 408);
+            this.ResultText.Size = new System.Drawing.Size(887, 404);
             this.ResultText.TabIndex = 12;
             this.ResultText.Text = "";
             // 
             // stopWatchText
             // 
             this.stopWatchText.Enabled = false;
-            this.stopWatchText.Location = new System.Drawing.Point(340, 129);
+            this.stopWatchText.Location = new System.Drawing.Point(378, 114);
             this.stopWatchText.Name = "stopWatchText";
             this.stopWatchText.ReadOnly = true;
-            this.stopWatchText.Size = new System.Drawing.Size(236, 29);
+            this.stopWatchText.Size = new System.Drawing.Size(154, 29);
             this.stopWatchText.TabIndex = 13;
             this.stopWatchText.Text = "0 ms";
             // 
             // clearAllData_Btn
             // 
             this.clearAllData_Btn.BackColor = System.Drawing.Color.Red;
-            this.clearAllData_Btn.Location = new System.Drawing.Point(174, 598);
+            this.clearAllData_Btn.Location = new System.Drawing.Point(106, 640);
             this.clearAllData_Btn.Name = "clearAllData_Btn";
             this.clearAllData_Btn.Size = new System.Drawing.Size(92, 70);
             this.clearAllData_Btn.TabIndex = 14;
@@ -282,15 +293,95 @@
             this.clearAllData_Btn.UseVisualStyleBackColor = false;
             this.clearAllData_Btn.Click += new System.EventHandler(this.ClearAllData_Btn_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.mainTab);
+            this.tabControl1.Controls.Add(this.bonusTab);
+            this.tabControl1.Location = new System.Drawing.Point(8, 178);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(904, 456);
+            this.tabControl1.TabIndex = 15;
+            // 
+            // mainTab
+            // 
+            this.mainTab.Controls.Add(this.ResultText);
+            this.mainTab.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.mainTab.Location = new System.Drawing.Point(4, 30);
+            this.mainTab.Name = "mainTab";
+            this.mainTab.Padding = new System.Windows.Forms.Padding(3);
+            this.mainTab.Size = new System.Drawing.Size(896, 416);
+            this.mainTab.TabIndex = 0;
+            this.mainTab.Text = "Main Deliverables";
+            this.mainTab.UseVisualStyleBackColor = true;
+            // 
+            // bonusTab
+            // 
+            this.bonusTab.Controls.Add(this.button1);
+            this.bonusTab.Controls.Add(this.actorName_txt);
+            this.bonusTab.Controls.Add(this.label1);
+            this.bonusTab.Controls.Add(this.bonusResultText);
+            this.bonusTab.Location = new System.Drawing.Point(4, 30);
+            this.bonusTab.Name = "bonusTab";
+            this.bonusTab.Padding = new System.Windows.Forms.Padding(3);
+            this.bonusTab.Size = new System.Drawing.Size(896, 422);
+            this.bonusTab.TabIndex = 1;
+            this.bonusTab.Text = "Bonus";
+            this.bonusTab.UseVisualStyleBackColor = true;
+            // 
+            // bonusResultText
+            // 
+            this.bonusResultText.Location = new System.Drawing.Point(5, 54);
+            this.bonusResultText.Name = "bonusResultText";
+            this.bonusResultText.ReadOnly = true;
+            this.bonusResultText.Size = new System.Drawing.Size(887, 356);
+            this.bonusResultText.TabIndex = 13;
+            this.bonusResultText.Text = "";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(162, 21);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Enter actor\'s name :";
+            // 
+            // actorName_txt
+            // 
+            this.actorName_txt.Location = new System.Drawing.Point(168, 19);
+            this.actorName_txt.Name = "actorName_txt";
+            this.actorName_txt.Size = new System.Drawing.Size(239, 29);
+            this.actorName_txt.TabIndex = 15;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(520, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 32);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(268, 117);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 21);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Time taken :";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Linen;
             this.ClientSize = new System.Drawing.Size(929, 722);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.clearAllData_Btn);
             this.Controls.Add(this.stopWatchText);
-            this.Controls.Add(this.ResultText);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.startAnalysis_btn);
@@ -311,6 +402,10 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.mainTab.ResumeLayout(false);
+            this.bonusTab.ResumeLayout(false);
+            this.bonusTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -338,5 +433,13 @@
         private System.Windows.Forms.RichTextBox ResultText;
         private System.Windows.Forms.TextBox stopWatchText;
         private System.Windows.Forms.Button clearAllData_Btn;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage mainTab;
+        private System.Windows.Forms.TabPage bonusTab;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox actorName_txt;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox bonusResultText;
+        private System.Windows.Forms.Label label2;
     }
 }

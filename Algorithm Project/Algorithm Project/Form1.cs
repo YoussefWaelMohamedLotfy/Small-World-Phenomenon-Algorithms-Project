@@ -177,7 +177,7 @@ namespace Algorithm_Project
                         }
                         for (int j = 1; j < recordContent.Length; j++) //Θ(n * k) assume k stands for length of the list(recordContent)
                         {
-                            if (adjacencyList[recordContent[i]].ContainsKey(recordContent[j]) && recordContent[i] != recordContent[j])   //Θ(n) Check if that key existe 
+                            if (adjacencyList[recordContent[i]].ContainsKey(recordContent[j]) && recordContent[i] != recordContent[j])   //Θ(n) Check if that key exists 
                             {
                                 adjacencyList[recordContent[i]][recordContent[j]].Direct_Freq++;     //Θ(1)increament the Relation Strength
 
@@ -230,6 +230,7 @@ namespace Algorithm_Project
         }
         #endregion
 
+        #region Analysis and clearing data
         private void startAnalysis_btn_Click(object sender, EventArgs e)
         {
             stopwatch.Start();   //Θ(1)
@@ -271,5 +272,6 @@ namespace Algorithm_Project
             selectedTestCaseLabel.Text = "Selected Test Case : None";   //Θ(1)
             stopwatch.Reset();   //Θ(1)
         }
+        #endregion
     }
 }
