@@ -20,14 +20,14 @@ namespace Algorithm_Project
     {
         public bool VisitedNode;
         public int distance;
-        public string Parent;
+        public int Parent;
         public int Undirect_Freq;
         public path()
         {
             Undirect_Freq = 0;
             VisitedNode = false;
             distance = int.MaxValue;
-            Parent = null;
+            Parent = 0;
         }
     }
 }

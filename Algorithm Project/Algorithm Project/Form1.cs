@@ -15,8 +15,11 @@ namespace Algorithm_Project
     public partial class Form1 : Form
     {
         string testCase;
-        Dictionary<string, Dictionary<string, Relation_str>> adjacencyList = new Dictionary<string, Dictionary<string, Relation_str>>();
-        Dictionary<string, path> checkNode = new Dictionary<string, path>();
+        Dictionary<int, Dictionary<int, Relation_str>> adjacencyList = new Dictionary<int, Dictionary<int, Relation_str>>();
+        Dictionary<int, path> checkNode = new Dictionary<int, path>();
+        Dictionary<string, int> ConvertToint = new Dictionary<string, int>();
+        Dictionary<int, string> ConvertTostring = new Dictionary<int, string>();
+        Dictionary<int,int> Frequency = new Dictionary<int, int>();
         List<QueriesActors> queriesActors = new List<QueriesActors>();
         Stopwatch stopwatch = new Stopwatch();
         
@@ -161,30 +164,40 @@ namespace Algorithm_Project
             {
                 FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 StreamReader sr = new StreamReader(fs);
-
+                int counter=1;
+                
                 while (sr.Peek() != -1)    //Θ(J * n * k^2) assume J stands for number of records within the file
                 {
                     string record = sr.ReadLine();                  //Θ(1)
                     string[] recordContent = record.Split('/');     //Θ(n)
                     string movie;                                   //Θ(1)
                     movie = recordContent[0];                       //Θ(1)
+                    for(int i=0;i<recordContent.Length;++i)           //Θ(n * k) assume k stands for length of the list(recordContent)
+                    {
+                        if(!ConvertToint.ContainsKey(recordContent[i]))     //Θ(n) assume n stands for number of elements in the (ConvertToint)
+                        {
+                                ConvertToint.Add(recordContent[i],counter);        //Θ(1)
+                                ConvertTostring.Add(counter,recordContent[i]);     //Θ(1)
+                                counter++;                                         //Θ(1)
+                        }
+                    }
                     for (int i = 1; i < recordContent.Length; i++)  //Θ(n * k^2) assume k stands for length of the list(recordContent)
                     {
-                        if (!adjacencyList.ContainsKey(recordContent[i]))    //Θ(n) assume n stands for number of elements in the (adjacencyList)
-                        {
-                            adjacencyList[recordContent[i]] = new Dictionary<string, Relation_str>();  //Θ(1)
-                            checkNode.Add(recordContent[i], new path());                           //Θ(1)
+                        if (!adjacencyList.ContainsKey(ConvertToint[recordContent[i]]) )    //Θ(n) assume n stands for number of elements in the (adjacencyList)
+                        {   
+                            adjacencyList[ConvertToint[recordContent[i]]] = new Dictionary<int, Relation_str>();  //Θ(1)
+                            checkNode.Add(ConvertToint[recordContent[i]], new path());                           //Θ(1)
                         }
                         for (int j = 1; j < recordContent.Length; j++) //Θ(n * k) assume k stands for length of the list(recordContent)
-                        {
-                            if (adjacencyList[recordContent[i]].ContainsKey(recordContent[j]) && recordContent[i] != recordContent[j])   //Θ(n) Check if that key exists 
+                        {   
+                            if (adjacencyList[ConvertToint[recordContent[i]]].ContainsKey(ConvertToint[recordContent[j]]) && recordContent[i] != recordContent[j])   //Θ(n) Check if that key exists 
                             {
-                                adjacencyList[recordContent[i]][recordContent[j]].Direct_Freq++;     //Θ(1)increament the Relation Strength
+                                adjacencyList[ConvertToint[recordContent[i]]][ConvertToint[recordContent[j]]].Direct_Freq++;     //Θ(1)increament the Relation Strength
 
                             }
-                            else if (!adjacencyList[recordContent[i]].ContainsKey(recordContent[j]) && recordContent[i] != recordContent[j])//Θ(n) 
-                            {
-                                adjacencyList[recordContent[i]].Add(recordContent[j], new Relation_str(movie));    //Θ(1) 
+                            else if (!adjacencyList[ConvertToint[recordContent[i]]].ContainsKey(ConvertToint[recordContent[j]]) && recordContent[i] != recordContent[j])//Θ(n) 
+                            {   
+                                adjacencyList[ConvertToint[recordContent[i]]].Add(ConvertToint[recordContent[j]], new Relation_str(movie));    //Θ(1) 
                             }
                         }
                     }
@@ -238,18 +251,19 @@ namespace Algorithm_Project
 
             for (int i = 0; i < queriesActors.Count; i++)    //  //Θ(n) assume n stands for number of elements in the (queriesActors)
             {
-                Algorithms.BFS_Algorithm(adjacencyList, checkNode, queriesActors[i].actor1, queriesActors[i].actor2);
-                result += "DoS = " + checkNode[queriesActors[i].actor2].distance + ", RS = " + checkNode[queriesActors[i].actor2].Undirect_Freq + "\n";  //Θ(1)
+                Algorithms.BFS_Algorithm(adjacencyList, checkNode, ConvertToint[queriesActors[i].actor1], ConvertToint[queriesActors[i].actor2]);
+                result += "DoS = " + checkNode[ConvertToint[queriesActors[i].actor2]].distance + ", RS = " + checkNode[ConvertToint[queriesActors[i].actor2]].Undirect_Freq + "\n";  //Θ(1)
                 string Actor = queriesActors[i].actor2;  //Θ(1)
                 string Path_Of_Actors = Actor;   //Θ(1)
-                string Path = "", Parent;  //Θ(1)
+                string Path = "";       //Θ(1)
+                int Parent;  //Θ(1)
 
-                while (Actor != queriesActors[i].actor1)    //can not be determined
+                while (ConvertToint[Actor] != ConvertToint[queriesActors[i].actor1])    //can not be determined
                 {
-                    Parent = checkNode[Actor].Parent;  //Θ(1)  
-                    Path_Of_Actors = Parent + "=>" + Path_Of_Actors;   //Θ(1)
-                    Path = adjacencyList[Actor][Parent].Common_Movie + "=>" + Path;   //Θ(1)
-                    Actor = Parent;   //Θ(1)
+                    Parent = checkNode[ConvertToint[Actor]].Parent;  //Θ(1)  
+                    Path_Of_Actors = ConvertTostring[Parent] + "=>" + Path_Of_Actors;   //Θ(1)
+                    Path = adjacencyList[ConvertToint[Actor]][Parent].Common_Movie + "=>" + Path;   //Θ(1)
+                    Actor = ConvertTostring[Parent];   //Θ(1)
                 }
 
                 result += "CHAIN OF ACTORS : " + Path_Of_Actors + "\n";   //Θ(1)
