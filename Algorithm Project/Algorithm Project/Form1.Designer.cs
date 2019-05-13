@@ -51,10 +51,10 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.mainTab = new System.Windows.Forms.TabPage();
             this.bonusTab = new System.Windows.Forms.TabPage();
-            this.bonusResultText = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.actorName_txt = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.actorName_txt = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.bonusResultText = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -310,7 +310,7 @@
             this.mainTab.Location = new System.Drawing.Point(4, 30);
             this.mainTab.Name = "mainTab";
             this.mainTab.Padding = new System.Windows.Forms.Padding(3);
-            this.mainTab.Size = new System.Drawing.Size(896, 416);
+            this.mainTab.Size = new System.Drawing.Size(896, 422);
             this.mainTab.TabIndex = 0;
             this.mainTab.Text = "Main Deliverables";
             this.mainTab.UseVisualStyleBackColor = true;
@@ -329,14 +329,22 @@
             this.bonusTab.Text = "Bonus";
             this.bonusTab.UseVisualStyleBackColor = true;
             // 
-            // bonusResultText
+            // button1
             // 
-            this.bonusResultText.Location = new System.Drawing.Point(5, 54);
-            this.bonusResultText.Name = "bonusResultText";
-            this.bonusResultText.ReadOnly = true;
-            this.bonusResultText.Size = new System.Drawing.Size(887, 356);
-            this.bonusResultText.TabIndex = 13;
-            this.bonusResultText.Text = "";
+            this.button1.Location = new System.Drawing.Point(520, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 32);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // actorName_txt
+            // 
+            this.actorName_txt.Location = new System.Drawing.Point(168, 19);
+            this.actorName_txt.Name = "actorName_txt";
+            this.actorName_txt.Size = new System.Drawing.Size(239, 29);
+            this.actorName_txt.TabIndex = 15;
             // 
             // label1
             // 
@@ -347,21 +355,14 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Enter actor\'s name :";
             // 
-            // actorName_txt
+            // bonusResultText
             // 
-            this.actorName_txt.Location = new System.Drawing.Point(168, 19);
-            this.actorName_txt.Name = "actorName_txt";
-            this.actorName_txt.Size = new System.Drawing.Size(239, 29);
-            this.actorName_txt.TabIndex = 15;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(520, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 32);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.bonusResultText.Location = new System.Drawing.Point(5, 54);
+            this.bonusResultText.Name = "bonusResultText";
+            this.bonusResultText.ReadOnly = true;
+            this.bonusResultText.Size = new System.Drawing.Size(887, 356);
+            this.bonusResultText.TabIndex = 13;
+            this.bonusResultText.Text = "";
             // 
             // label2
             // 

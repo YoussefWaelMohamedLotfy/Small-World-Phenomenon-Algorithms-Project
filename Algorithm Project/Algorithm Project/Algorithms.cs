@@ -33,7 +33,7 @@ namespace Algorithm_Project
         /// <param name="vertex"></param>
         /// <param name="source">The first name in query</param>
         /// <param name="destination">The second name in query</param>
-        public static void BFS_Algorithm(Dictionary<int, Dictionary<int, Relation_str>> adjacencyList, Dictionary<int, path> vertex,int source, int destination) //Total Complexity of this function => Θ(V + E)
+        public static void BFS_Algorithm(Dictionary<int, Dictionary<int, Relation_str>> adjacencyList, Dictionary<int, path> vertex, int source, int destination) //Total Complexity of this function => Θ(V + E)
         {
             Intialize(vertex);                                     //Θ(V) Touch Or Visit every vertex in Graph. 
             Queue<int> nodes = new Queue<int>();                   //Θ(1)
@@ -71,7 +71,15 @@ namespace Algorithm_Project
                 }
             }
         }
-        public static void BFS_Algorithm(Dictionary<int, Dictionary<int, Relation_str>> adjacencyList, Dictionary<int, path> vertex,Dictionary<int,int> Frequency,int source) //Total Complexity of this function => Θ(V + E)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="adjacencyList">The list that stores all data</param>
+        /// <param name="vertex"></param>
+        /// <param name="Frequency">Frequency of actor</param>
+        /// <param name="source">Index of start</param>
+        public static void BFS(Dictionary<int, Dictionary<int, Relation_str>> adjacencyList, Dictionary<int, path> vertex, Dictionary<int,int> Frequency, int source) //Total Complexity of this function => Θ(V + E)
         {
             Intialize(vertex);                                     //Θ(V) Touch Or Visit every vertex in Graph. 
             Queue<int> nodes = new Queue<int>();                   //Θ(1)
@@ -80,6 +88,7 @@ namespace Algorithm_Project
             vertex[source].distance = 0;                           //Θ(1) make distance of source equal to zero.
             Frequency[0] = 1;
             vertex[source].Undirect_Freq = 0;                      //Θ(1) make freq of source equal to zero.
+
             while (nodes.Count() != 0)                             //Θ(V)
             {
                 int front = nodes.Dequeue();                   //Θ(V) Visit every vertex and dequeue it from queue.
