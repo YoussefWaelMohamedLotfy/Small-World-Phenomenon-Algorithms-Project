@@ -276,10 +276,12 @@ namespace Algorithm_Project
                 result += "CHAIN OF MOVIES : " + Path + "\n\n";     //Θ(1)
             }
 
-            SaveDataOutput(result); //Θ(1)
-            ResultText.Text = result;   //Θ(1)
+
             stopwatch.Stop();   //Θ(1)
             stopWatchText.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";   //Θ(1)
+            result += stopWatchText.Text;
+            SaveDataOutput(result); //Θ(1)
+            ResultText.Text = result;   //Θ(1)
         }
 
         private void SaveDataOutput(string res)
