@@ -378,13 +378,20 @@ namespace Algorithm_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string result = "";
-
-            for (int i = 0; i < adjacencyList.Count; i++)
-            {
-                Algorithms.BFS(adjacencyList, checkNode, Frequency, ConvertToint[actorName_txt.Text]); //Θ(V + E)
-
-            }
+            //string result = "";
+       
+            //for (int i = 0; i < adjacencyList.Count; i++)
+            //{
+            //Algorithms.BFS(adjacencyList, checkNode, Frequency, ConvertToint[actorName_txt.Text]); //Θ(V + E)
+            //}
+            //foreach (int key1 in checkNode.Keys)
+            //{
+            //    int ferqTemp = Frequency[checkNode[key1].distance];
+            //    result += checkNode[key1].distance.ToString();
+            //    result += "\t";
+            //    result += ferqTemp.ToString() + "\n";
+            //    bonusResultText.Text = result;
+            //}
         }
     }
 }
