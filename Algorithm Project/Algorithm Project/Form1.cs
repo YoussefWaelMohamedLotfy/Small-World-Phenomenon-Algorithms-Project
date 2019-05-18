@@ -287,7 +287,7 @@ namespace Algorithm_Project
             switch (testCase)
             {
                 case "Sample" :
-                    fs = new FileStream("Sample_SOLUTION/Output.txt", FileMode.Create, FileAccess.Write); //Θ(1)
+                    fs = new FileStream("C:\\Users\\HEI\\Source\\Repos\\YoussefWaelMohamedLotfy\\Small-World-Phenomenon-Algorithms-Project\\Algorithm Project\\Output.txt", FileMode.Create, FileAccess.Write); //Θ(1)
                     break;
 
                 case "Small" :
@@ -341,11 +341,11 @@ namespace Algorithm_Project
                 case "Extreme" :
                     if (smallQuery_radioButton.Checked)
                     {
-                        fs = new FileStream("Complete_SOLUTION/Extreme_SOLUTION/queries22 - SOLUTION.txt", FileMode.Create, FileAccess.Write); //Θ(1)
+                        fs = new FileStream("C:\\Users\\HEI\\Source\\Repos\\YoussefWaelMohamedLotfy\\Small-World-Phenomenon-Algorithms-Project\\Algorithm Project\\Output.txt", FileMode.Create, FileAccess.Write); //Θ(1)
                     }
                     else if (largeQuery_radioButton.Checked)
                     {
-                        fs = new FileStream("Complete_SOLUTION/Extreme_SOLUTION/queries200 - SOLUTION.txt", FileMode.Create, FileAccess.Write); //Θ(1)
+                        fs = new FileStream("C:\\Users\\HEI\\Source\\Repos\\YoussefWaelMohamedLotfy\\Small-World-Phenomenon-Algorithms-Project\\Algorithm Project\\Output.txt", FileMode.Create, FileAccess.Write); //Θ(1)
                     }
 
                     break;
@@ -357,7 +357,8 @@ namespace Algorithm_Project
 
             StreamWriter sr = new StreamWriter(fs); //Θ(1)
             sr.Write(res); //Θ(1)
-
+            sr.Close();
+            fs.Close();
         }
 
         private void ClearAllData_Btn_Click(object sender, EventArgs e)
