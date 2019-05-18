@@ -88,7 +88,6 @@ namespace Algorithm_Project
             vertex[source].distance = 0;                           //Θ(1) make distance of source equal to zero.
             Frequency[0] = 1;
             vertex[source].Undirect_Freq = 0;                      //Θ(1) make freq of source equal to zero.
-
             while (nodes.Count() != 0)                             //Θ(V)
             {
                 int front = nodes.Dequeue();                   //Θ(V) Visit every vertex and dequeue it from queue.
@@ -101,7 +100,12 @@ namespace Algorithm_Project
                         vertex[key].VisitedNode = true;           //Θ(1)after putting node in queue that is mean we visited it and make it true.                                                           
                         vertex[key].Parent = front;               //Θ(1)make the parent of vertex equal to front.                                                                                        
                         vertex[key].distance = vertex[front].distance + 1; //Θ(1)calculate DOS (Degree Of Separation) between source and destination.     
-                        Frequency[vertex[key].distance] += 1;               //Θ(1)
+                        if (Frequency.ContainsKey(vertex[key].distance))
+                        {
+                            Frequency[vertex[key].distance] += 1;    //Θ(1)
+                        }
+                        else
+                            Frequency[vertex[key].distance] = 0;               //Θ(1)
                     }   
                 }
             }
